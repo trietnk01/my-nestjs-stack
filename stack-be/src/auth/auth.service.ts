@@ -12,19 +12,19 @@ export class AuthService {
     private confService: ConfigService
   ) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
+  validateUser = async (username: string, password: string): Promise<any> => {
     const user = await this.usersService.findOneByUsername(username);
     if (user) {
-      const isValid = this.usersService.isValidPassword(pass, user.password);
+      const isValid = this.usersService.isValidPassword(password, user.password);
       if (isValid === true) {
         return user;
       }
     }
     return null;
-  }
+  };
   async login(user: IUser, response: Response) {
-    const { _id, displayName, email, role } = user;
-    const payload = { sub: "token login", iss: "from server", _id, name, email, role };
+    const { _id, displayName, email } = user;
+    const payload = { sub: "token login", iss: "from server", _id, displayName, email };
     const refresh_token = this.createRefreshToken(payload);
     await this.usersService.updateUserToken(_id, refresh_token);
     response.cookie("refresh_token", refresh_token, {
@@ -36,9 +36,8 @@ export class AuthService {
       refresh_token,
       user: {
         _id,
-        name,
-        email,
-        role
+        displayName,
+        email
       }
     };
   }
