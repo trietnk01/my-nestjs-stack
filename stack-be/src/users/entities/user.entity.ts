@@ -1,10 +1,9 @@
-import mongoose from "mongoose";
-import { Column, Entity, ObjectIdColumn } from "typeorm";
+import { Column, Entity, ObjectId, ObjectIdColumn } from "typeorm";
 
 @Entity({ name: "users" })
 export class User {
   @ObjectIdColumn()
-  _id: mongoose.Types.ObjectId;
+  _id: ObjectId;
 
   @Column()
   userId: string;

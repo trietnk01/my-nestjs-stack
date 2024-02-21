@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import { ObjectId } from "typeorm";
 
 export interface IUser {
-  _id: mongoose.Types.ObjectId;
+  _id: ObjectId;
   userId: string;
   sub: string;
   role: string;

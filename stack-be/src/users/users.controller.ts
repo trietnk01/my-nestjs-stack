@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Patch, Post, Query, Req } from "@nestjs/common";
 import { Request } from "express";
 import { UsersService } from "./users.service";
+import { Public } from "src/decorator/customize";
 
 @Controller("users")
 export class UsersController {
@@ -18,6 +19,7 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
+  @Public()
   @Patch("/refresh-token/:id")
   handleRefresh(@Param() params: any, @Req() req: Request) {
     const { id } = params;
