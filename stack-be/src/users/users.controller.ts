@@ -1,12 +1,13 @@
-import { Controller, Get, Param, Patch, Post, Query, Req } from "@nestjs/common";
+import { Controller, Get, Param, Patch, Query, Req } from "@nestjs/common";
 import { Request } from "express";
-import { UsersService } from "./users.service";
 import { Public } from "src/decorator/customize";
+import { UsersService } from "./users.service";
 
 @Controller("users")
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @Public()
   @Get("/get-by-username")
   findOneByUsername(@Query() query: any) {
     const { username } = query;

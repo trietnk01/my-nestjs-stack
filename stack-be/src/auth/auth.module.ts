@@ -16,7 +16,7 @@ import { LocalStrategy } from "./passport/local.strategy";
       useFactory: async (confService: ConfigService) => ({
         secret: confService.get<string>("JWT_ACCESS_TOKEN_SECRET"),
         signOptions: {
-          expiresIn: `${confService.get<string>("JWT_ACCESS_EXPIRE")}s`
+          expiresIn: confService.get<string>("JWT_ACCESS_EXPIRE").toString()
         }
       }),
       inject: [ConfigService]

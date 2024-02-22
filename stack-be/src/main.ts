@@ -7,6 +7,7 @@ import { join } from "path";
 import { AppModule } from "./app.module";
 import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 import { TransformInterceptor } from "./core/transform.interceptor";
+import ms from "ms";
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const confService = app.get(ConfigService);

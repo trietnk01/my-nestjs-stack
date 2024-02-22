@@ -2,12 +2,14 @@ import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { AuthModule } from "./auth/auth.module";
 import { CategoriesModule } from "./categories/categories.module";
 import { Category } from "./categories/entities/category.entity";
-import { AppService } from "./app.service";
-import { UsersModule } from "./users/users.module";
+import { Product } from "./products/entities/product.entity";
+import { ProductsModule } from "./products/products.module";
 import { User } from "./users/entities/user.entity";
-import { AuthModule } from "./auth/auth.module";
+import { UsersModule } from "./users/users.module";
 
 @Module({
   imports: [
@@ -23,13 +25,15 @@ import { AuthModule } from "./auth/auth.module";
         username: confService.get<string>("MONGODB_USERNAME").toString(),
         password: confService.get<string>("MONGODB_PASSWORD").toString(),
         database: confService.get<string>("MONGODB_DATABASE").toString(),
-        entities: [Category, User]
+        entities: [User, Category, Product],
+        autoLoadEntities: true
       }),
       inject: [ConfigService]
     }),
     AuthModule,
     UsersModule,
-    CategoriesModule
+    CategoriesModule,
+    ProductsModule
   ],
   controllers: [AppController],
   providers: [AppService]

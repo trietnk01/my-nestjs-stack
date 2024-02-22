@@ -2,11 +2,11 @@ import { ObjectId } from "typeorm";
 
 export interface IUser {
   _id: ObjectId;
-  userId: string;
   sub: string;
   role: string;
   username: string;
   displayName: string;
+  name: string;
   email: string;
   age: number;
   password: string;

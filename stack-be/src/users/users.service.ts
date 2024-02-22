@@ -14,7 +14,7 @@ export class UsersService {
     return this.usersRepository.findOne({ where: { _id: new mongoose.Types.ObjectId(id) } });
   };
   findOneByUsername = async (username: string) => {
-    const data = await this.usersRepository.findOne({ select: { displayName: true }, where: { username } });
+    const data = await this.usersRepository.findOne({ select: ["_id", "displayName", "email", "password"], where: { username } });
     return data;
   };
   update(id: number, updateUserDto: UpdateUserDto) {
